@@ -1,8 +1,9 @@
 # Meridian
-- A news scraper that takes in articles from RSS feeds of major news sources and return the locations of the stories.
+- A RESTful news scraper that takes in articles from RSS feeds of major news sources and returns the summary and location of the stories.
 - Uses CLAVIN geotagger to parse each articles.
 - Java project built using Spring Boot/Gradle
 - Originally titled 'WhereThingsHappened', a React-based project with Java backend that used Mapbox map to pin where the news stories happened.
+- Closing project until better Geoparsing solution can be found - current method too slow for real-time parsing.
 
 ### Run:
 - Install [CLAVIN] (https://clavin.bericotechnologies.com/clavin-core/tutorials/installation.html) is installed in the root directory
