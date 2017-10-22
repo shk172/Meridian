@@ -1,4 +1,5 @@
 package main.java.meridian;
+import java.util.HashSet;
 /*
 Represents one RSS message
  */
@@ -9,6 +10,7 @@ public class FeedMessage {
     String link;
     String author;
     String guid;
+    HashSet<Json> jsons;
 
     public String getTitle() {
         return title;
@@ -51,6 +53,12 @@ public class FeedMessage {
     }
     public String getFeedSummary(){
     	return title + description;
+    }
+    public void setJSON(HashSet<Json> jsons) {
+    	this.jsons = jsons;
+    }
+    public HashSet<Json> getJSON(){
+    	return jsons;
     }
     @Override
     public String toString() {

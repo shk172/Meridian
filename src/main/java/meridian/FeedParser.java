@@ -8,6 +8,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
+import java.util.HashSet;
 
 import main.java.meridian.Feed;
 import main.java.meridian.FeedMessage;
@@ -34,7 +35,7 @@ public class FeedParser {
         }
     }
 
-    public Feed readFeed() {
+    public Feed readFeed(){
         Feed feed = null;
         try {
             boolean isFeedHeader = true;
@@ -101,7 +102,18 @@ public class FeedParser {
                         message.setGuid(guid);
                         message.setLink(link);
                         message.setTitle(title);
-                        feed.getMessages().add(message);
+                        HashSet<String> parseResults;
+						try {
+							parseResults = GeoParser.parse(message.getTitle(), message.getDescription());
+							if(!parseResults.isEmpty()){
+	                    		MapInfo info = new MapInfo(parseResults, message.getTitle(), message.getDescription());
+	                    		HashSet<Json> jsons = info.toJSON();
+	                    		message.setJSON(jsons);
+	                    	}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+                        feed.getArticles().add(message);
                         event = eventReader.nextEvent();
                         continue;
                     }
